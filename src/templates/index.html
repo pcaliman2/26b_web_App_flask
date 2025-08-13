@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictor de Precio de Autos Usados</title>
+    
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/images/carros01.jpg");
+            background-color: rgba(127, 175, 179, 0.384); /* Fondo beige claro */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 25px; /* Borde más redondeado */
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        label i {
+            margin-right: 8px;
+            color: #007BFF;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            margin-top: 25px;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 10px;
+            color: #2d572c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predictor de Precio de Autos Usados</h1>
+
+        <form action="/" method="post">
+            <label><i class="fas fa-calendar-alt"></i> Año del Vehículo</label>
+            <input type="number" step="any" name="yearr" value="1980" min="1980" max="2025" required>
+
+            <label><i class="fas fa-tachometer-alt"></i> Kilometraje (Odómetro)</label>
+            <input type="number" step="any" name="Odometerr" required>
+
+            
+            <label><i class="fas fa-car"></i> Fabricante (Manufacturer)</label>
+            <div class="relative">
+                <input type="text" id="fabricante" name="fabricante" placeholder="Escribe el fabricante..." autocomplete="off">
+                <div id="sugerencias_fabricantes"></div>
+            </div>
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const inputFab = document.getElementById("fabricante");
+                    const sugerenciasFab = document.getElementById("sugerencias_fabricantes");
+                
+                    inputFab.addEventListener("input", function () {
+                        const query = this.value.trim();
+                
+                        if (query.length < 2) {
+                            sugerenciasFab.innerHTML = "";
+                            return;
+                        }
+                
+                        fetch('/autocomplete/fabricantes?q=' + encodeURIComponent(query))
+                            .then(response => response.json())
+                            .then(data => {
+                                sugerenciasFab.innerHTML = "";
+                                data.forEach(item => {
+                                    const div = document.createElement("div");
+                                    div.textContent = item;
+                                    div.addEventListener("click", function () {
+                                        inputFab.value = item;
+                                        sugerenciasFab.innerHTML = "";
+                                    });
+                                    sugerenciasFab.appendChild(div);
+                                });
+                            });
+                    });
+                
+                    document.addEventListener("click", function (e) {
+                        if (!inputFab.contains(e.target) && !sugerenciasFab.contains(e.target)) {
+                            sugerenciasFab.innerHTML = "";
+                        }
+                    });
+                });
+                </script>
+                
+
+            <label><i class="fas fa-car-side"></i> Modelo del Vehículo</label>
+            <div class="relative">
+                <input type="text" id="modelo" name="modelo" placeholder="Escribe el modelo..." autocomplete="off">
+                <div id="sugerencias"></div>
+            </div>
+    
+            <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const input = document.getElementById("modelo");
+                const sugerencias = document.getElementById("sugerencias");
+    
+                input.addEventListener("input", function () {
+                    const query = this.value.trim();
+    
+                    if (query.length < 2) {
+                        sugerencias.innerHTML = "";
+                        return;
+                    }
+    
+                    fetch('/autocomplete/modelos?q=' + encodeURIComponent(query))
+                        .then(response => response.json())
+                        .then(data => {
+                            sugerencias.innerHTML = "";
+                            data.forEach(item => {
+                                const div = document.createElement("div");
+                                div.textContent = item;
+                                div.addEventListener("click", function () {
+                                    input.value = item;
+                                    sugerencias.innerHTML = "";
+                                });
+                                sugerencias.appendChild(div);
+                            });
+                        });
+                });
+    
+                document.addEventListener("click", function (e) {
+                    if (!input.contains(e.target) && !sugerencias.contains(e.target)) {
+                        sugerencias.innerHTML = "";
+                    }
+                });
+            });
+            </script>
+            
+            <label><i class="fas fa-wrench"></i> Estado del Vehículo</label>
+            <select name="condittionn" required>
+                <option value="good">Bueno</option>
+                <option value="excellent">Excelente</option>
+                <option value="like new">Como Nuevo</option>
+                <option value="fair">Justo</option>
+                <option value="new">Nuevo</option>
+                <option value="salvage">Salvaje</option>
+            </select>
+
+
+
+            <label><i class="fas fa-gas-pump"></i> Tipo de Combustible</label>
+            <select name="fuell" required>
+                <option value="gas">Gasolina</option>
+                <option value="diesel">Diesel</option>
+                <option value="hybrid">Hibrido</option>
+                <option value="electric">Electrico</option>
+                <option value="other">Otro</option>
+            </select>
+
+
+
+
+            <label><i class="fas fa-file-alt"></i>Estado del Titulo</label>
+            <select name="Tituloo" required>
+                <option value="clean">Buen Estado</option>
+                <option value="rebuilt">Reconstruido</option>
+                <option value="salvage">Deterioro Grave</option>
+                <option value="lien">Con deuda</option>
+                <option value="missing">Perdido</option>
+                <option valuez="parts only">Solo Pedazos</option>
+            </select>
+
+
+
+
+            <label><i class="fas fa-cogs"></i> Tipo de Caja</label>
+            <select name="Caja" required>
+                <option value="automatic">Automatico</option>
+                <option value="manual">Sincronica</option>
+                <option value="other">Otro</option>        
+            </select>
+
+
+
+            <label><i class="fas fa-map-marker-alt"></i> Estado (State)</label>
+            <div class="relative">
+                <input type="text" id="statee" name="statee" placeholder="Escribe el estado..." autocomplete="off">
+            <div id="sugerencias_estados"></div>
+            </div>
+    
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                const inputState = document.getElementById("statee");
+                const sugerenciasState = document.getElementById("sugerencias_estados");
+    
+                inputState.addEventListener("input", function () {
+                    const query = this.value.trim();
+    
+                    if (query.length < 1) {
+                        sugerenciasState.innerHTML = "";
+                        return;
+                }
+    
+                fetch('/autocomplete/estados?q=' + encodeURIComponent(query))
+                    .then(response => response.json())
+                    .then(data => {
+                        sugerenciasState.innerHTML = "";
+                        data.forEach(item => {
+                            const div = document.createElement("div");
+                            div.textContent = item;
+                            div.addEventListener("click", function () {
+                                inputState.value = item;
+                                sugerenciasState.innerHTML = "";
+                            });
+                            sugerenciasState.appendChild(div);
+                        });
+                    });
+            });
+    
+            document.addEventListener("click", function (e) {
+                if (!inputState.contains(e.target) && !sugerenciasState.contains(e.target)) {
+                    sugerenciasState.innerHTML = "";
+                }
+            });
+        });
+    </script>
+    
+
+
+
+            <label><i class="fas fa-clock"></i> Fecha de Publicado</label>
+            <input type="date" name="fechaa" required>
+
+
+            <input type="submit" value="Predecir Precio">
+        </form>
+
+
+
+        {% if prediction != None %}
+            <h3>Predicción del Precio: {{ prediction }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
