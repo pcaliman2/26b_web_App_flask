@@ -53,38 +53,27 @@ def index():
 
         rsrpxx = float(request.form["rsrp"])
         ecioxx = float(request.form["ecio"])
-        fabricante = request.form["fabricante"]
-        modelo = request.form["modelo"]
-        condittionn = request.form["condittionn"]
-        fuell = request.form["fuell"]
+        txpowerxx = request.form["txpower"]
+        blerxx = request.form["bler"]
+        rssixx = request.form["rssi"]
+        speechcodecrxx = request.form["speechcode"]
         tituloo = request.form["Tituloo"]
         caja = request.form["Caja"]
         statee = request.form["statee"]
         fechaa = request.form["fechaa"]
 
-        # Puedes imprimir para verificar que llegan bien:
-        #print(">>> Datos recibidos:")
-        #print("Año:", yearr)
-        #print("Odómetro:", odometerr)
-        #print("Fabricante:", fabricante)
-        #print("Modelo:", modelo)
-        #print("Condición:", condittionn)
-        #print("Combustible:", fuell)
-        #print("Título:", tituloo)
-        #print("Caja:", caja)
-        #print("Estado:", statee)
-        #print("Fecha:", fechaa)
+       
 
 
 
-        data = [[rsrpxx, ecioxx, fabricante, modelo, condittionn, fuell, tituloo, caja, statee, fechaa]]
+        data = [[ecioxx, rsrpxx, txpowerxx, blerxx, rssixx, speechcodecrxx, tituloo, caja, statee, fechaa]]
 
         fecha_cruda = request.form.get("fechaa")
         fecha_formateada = formatear_fecha(fecha_cruda)
 
 
         columnas = ['year', 'manufacturer', 'model', 'condition', 'fuel', 'odometer', 'title_status', 'transmission', 'state', 'posting_date']
-        dato_crudo = [yearr, fabricante, modelo, condittionn, fuell, odometerr, tituloo, caja, statee, fecha_formateada]
+        dato_crudo = [ecioxx, rsrpxx, txpowerxx, blerxx, rssixx, speechcodecrxx]
 #dato_crudo = [2006, 'ram', '2500', 'good', 'gas', 129761, 'clean', 'automatic', 'in', '2021-04-29T16:03:59-0400']
 
 
