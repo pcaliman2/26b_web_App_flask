@@ -49,7 +49,7 @@ modelo.compile(
 )
 
 print("Comenzando Entrenamiento...")
-historial = modelo.fit(datos_entrada , mos_output, epochs =3000  , verbose = True)
+historial = modelo.fit(datos_entrada , mos_output, epochs =50 , verbose = True)
 #historial = modelo.fit(celcius, farenh, epochs = 1000)
 print('Modelo entrenado')
 
