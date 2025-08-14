@@ -56,8 +56,8 @@ def index():
         
         modelo = request.form.get("modelo", "")
 
-        yearr = float(request.form["yearr"])
-        odometerr = float(request.form["Odometerr"])
+        rsrpxx = float(request.form["rsrp"])
+        ecioxx = float(request.form["ecio"])
         fabricante = request.form["fabricante"]
         modelo = request.form["modelo"]
         condittionn = request.form["condittionn"]
@@ -82,7 +82,7 @@ def index():
 
 
 
-        data = [[yearr, odometerr, fabricante, modelo, condittionn, fuell, tituloo, caja, statee, fechaa]]
+        data = [[rsrpxx, ecioxx, fabricante, modelo, condittionn, fuell, tituloo, caja, statee, fechaa]]
 
         fecha_cruda = request.form.get("fechaa")
         fecha_formateada = formatear_fecha(fecha_cruda)
