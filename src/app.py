@@ -29,17 +29,17 @@ def index():
   
 
 
-
-        data = [[ecioxx, rsrpxx, txpowerxx, blerxx, rssixx, speechcodecrxx]]
-
-
-        columnas = ['ecio', 'rsrp', 'txpower', 'bler', 'rssi', 'speechcodecr']
         dato_crudo = [ecioxx, rsrpxx, txpowerxx, blerxx, rssixx, speechcodecrxx]
-#dato_crudo = [2006, 'ram', '2500', 'good', 'gas', 129761, 'clean', 'automatic', 'in', '2021-04-29T16:03:59-0400']
+        
 
-
-        df_test = pd.DataFrame([dato_crudo], columns=columnas)
-        #print(df_test.head())
+        df_test = pd.DataFrame([dato_crudo], columns=[
+            'wcdma_aset_ecio_avg',
+            'wcdma_aset_rscp_avg',
+            'wcdma_txagc',
+            'wcdma_bler_average_percent_all_channels',
+            'wcdma_rssi',
+            'gsm_speechcodecrx'
+        ])
 
 
         y_pred = modelopredictor.predict(df_test)
