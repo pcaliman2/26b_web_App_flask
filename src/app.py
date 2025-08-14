@@ -41,12 +41,7 @@ def autocomplete_estados():
 
 
 
-model = load(open("../models/decision_tree_classifier_default_42.sav", "rb"))
-class_dict = {
-    "0": "Dato 01",
-    "1": "Dato 02",
-    "2": "Dato 03"
-}
+
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
