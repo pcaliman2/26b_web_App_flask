@@ -16,7 +16,8 @@ The project is organized as follows:
 
 ## Ejecutar la Aplicacion
 
-PAra ejecutar la aplicación se debe correr el servicio de flask a trave del archivo run_waitress.py que esta en el directorio src
+Para ejecutar la aplicación se debe correr el servicio de flask a trave del archivo run_waitress.py que esta en el directorio src:
+
 python /src/run_waitress.py
 ## Contributors
 
