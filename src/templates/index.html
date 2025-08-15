@@ -87,8 +87,8 @@
         {% endif %}
 
 
-            <label><i class="fas fa-tachometer-alt"></i> RSCP (Received Signal Code Power)</label>
-            <input type="number" step="any" name="rsrp" required>
+            <label><i class="fas fa-tachometer-alt"></i> RSCP (Received Signal Code Power) Rango -130 dB (Malo) a -50 dB (Excelente)</label>
+            <input type="number" step="any" name="rsrp" min="-130" max="-50" required>
 
             <label><i class="fas fa-tachometer-alt"></i> ECIO (Energy per Chip to Interference)</label>
             <input type="number" step="any" name="ecio" required>
