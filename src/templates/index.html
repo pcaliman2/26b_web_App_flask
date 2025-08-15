@@ -87,35 +87,30 @@
         {% endif %}
 
 
-            <label><i class="fas fa-tachometer-alt"></i> RSCP (Received Signal Code Power) Rango -130 dB (Malo) a -50 dB (Excelente)</label>
-            <input type="number" step="any" name="rsrp" min="-130" max="-50" required>
+<label><i class="fas fa-signal"></i> RSCP (Received Signal Code Power) Rango -130 dBm (Malo) a -50 dBm (Excelente)</label>
+<input type="number" step="any" name="rsrp" min="-130" max="-50" required>
 
-            <label><i class="fas fa-tachometer-alt"></i> ECIO (Energy per Chip to Interference)</label>
-            <input type="number" step="any" name="ecio" required>
+<label><i class="fas fa-broadcast-tower"></i> ECIO (Energy per Chip to Interference) Rango -30 (Malo) a 0 (Excelente)</label>
+<input type="number" step="any" name="ecio" min="-30" max="0" required>
 
-    
-            <label><i class="fas fa-tachometer-alt"></i> TxPower (TxPower)</label>
-            <input type="number" step="any" name="txpower" required> 
+<label><i class="fas fa-bolt"></i> Transmision Power Rango -50 dBm (Excelente) a 23 dBm (Malo)</label>
+<input type="number" step="any" name="txpower" min="-50" max="23" required>
 
+<label><i class="fas fa-times-circle"></i> BLER Rango de 0 (Excelente) a 1 (100% de Falla)</label>
+<input type="number" step="any" name="bler" min="0" max="1" required>
 
-            <label><i class="fas fa-tachometer-alt"></i> Bler (Bler)</label>
-            <input type="number" step="any" name="bler" required> 
-                
+<label><i class="fas fa-wave-square"></i> RSSI Rango -130 dBm (Malo) a -50 dBm (Excelente)</label>
+<input type="number" step="any" name="rssi" min="-130" max="-50" required>
 
-            <label><i class="fas fa-tachometer-alt"></i> rssi</label>
-            <input type="number" step="any" name="rssi" required>     
-
-
-          
-            <label><i class="fas fa-wrench"></i> speechcode</label>
-            <select name="speechcode" required>
-                <option value=4.53>EFR</option>
-                <option value=4.5>AMR Full Rate</option>
-                <option value=4.41>AMR Half Rate</option>
-                <option value=4.36>AMR WB</option>
-                <option value=4.16>Full Rate</option>
-                <option value=3.95>Half Rate</option>
-            </select>
+<label><i class="fas fa-microphone-alt"></i> Speech Code</label>
+<select name="speechcode" required>
+    <option value="4.53">EFR</option>
+    <option value="4.5">AMR Full Rate</option>
+    <option value="4.41">AMR Half Rate</option>
+    <option value="4.36">AMR WB</option>
+    <option value="4.16">Full Rate</option>
+    <option value="3.95">Half Rate</option>
+</select>
 
 
 
